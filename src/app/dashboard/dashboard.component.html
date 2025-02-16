@@ -1,6 +1,6 @@
 <div class="flex">
     <app-navbar></app-navbar>
-    <div>
+    <div class=" flex-grow py-3 px-6">
         <p-table 
         #dt1
         [value]="products" 
@@ -15,12 +15,12 @@
                     <p-inputicon>
                         <i class="pi pi-search"></i>
                     </p-inputicon>
-                    [<input
+                    <input
                         pInputText
                         type="text"
                         (input)="dt1.filterGlobal($any($event.target).value, 'contains')"
                         placeholder="Search by product name"
-                    />]
+                    />
 
                 </p-iconfield>
             </div>
@@ -42,6 +42,7 @@
                         <p-sortIcon field="quantity" />
                     </th>
                     <th>Status</th>
+                    <th>Actions</th>
                 </tr>
             </ng-template>
             <ng-template #body let-product>
@@ -51,14 +52,17 @@
                     <td>{{ product.price }}</td>
                     <td>
                         <p-tag class="m-1" *ngFor="let category of product.category"  severity="contrast">
-                            {{ category }}
+                            {{ category.name }}
                         </p-tag>
 
                     </td>
                     <td>{{ product.quantity }}</td>
                     <td>
                         <p-tag [value]="product.status" [severity]="getSeverity(product.status)" />
-                        
+                    </td>
+                    <td>
+                        <a [routerLink]="['/product', product.id, 'edit']"><p-button class="m-1"  icon="pi pi-pencil" severity="info" /></a>
+                        <p-button class="m-1" icon="pi pi-trash" severity="danger" />
                     </td>
                 </tr>
             </ng-template>

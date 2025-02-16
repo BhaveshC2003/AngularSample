@@ -9,20 +9,14 @@ import { ButtonModule } from 'primeng/button';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { InputTextModule } from 'primeng/inputtext';
+import { Product } from '../../interfaces/Product';
 
-
-interface Product{
-  id: number,
-  name:string,
-  price: number,
-  quantity: number,
-  status:string,
-  category: string[]
-}
+import {RouterLink} from "@angular/router"
 
 @Component({
   selector: 'app-dashboard',
-  imports: [NavbarComponent, TableModule, TagModule, RatingModule, ButtonModule, CommonModule,IconFieldModule,InputIconModule,InputTextModule],
+  imports: [NavbarComponent, TableModule, TagModule, RatingModule, ButtonModule, 
+          RouterLink,CommonModule,IconFieldModule,InputIconModule,InputTextModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
@@ -34,7 +28,16 @@ export class DashboardComponent {
       price: 40,
       quantity: 3,
       status:"INSTOCK",
-      category: ["Category 1", "Category 2"]
+      category: [
+        {
+          id: 1,
+          name: "Category 1"
+        },
+        {
+          id: 2,
+          name: "Category 2"
+        }
+      ]
     },
     {
       id: 2,
@@ -42,7 +45,16 @@ export class DashboardComponent {
       price: 50,
       quantity: 2,
       status: 'LOWSTOCK',
-      category: ["Category 1", "Category 2"]
+      category: [
+        {
+          id: 1,
+          name: "Category 1"
+        },
+        {
+          id: 2,
+          name: "Category 2"
+        }
+      ]
     },
     {
       id: 3,
@@ -50,7 +62,16 @@ export class DashboardComponent {
       price:60,
       quantity: 0,
       status: 'OUTOFSTOCK',
-      category: ["Category 1", "Category 2"]
+      category: [
+        {
+          id: 1,
+          name: "Category 1"
+        },
+        {
+          id: 2,
+          name: "Category 2"
+        }
+      ]
     }
   ]
   getSeverity(status: string) {
