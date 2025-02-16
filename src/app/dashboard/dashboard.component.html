@@ -1,0 +1,67 @@
+<div class="flex">
+    <app-navbar></app-navbar>
+    <div>
+        <p-table 
+        #dt1
+        [value]="products" 
+        stripedRows 
+        [tableStyle]="{ 'min-width': '50rem' }"
+        [globalFilterFields]="['name']"
+        
+        >
+        <ng-template #caption>
+            <div class="flex">
+                <p-iconfield iconPosition="left" class="ml-auto">
+                    <p-inputicon>
+                        <i class="pi pi-search"></i>
+                    </p-inputicon>
+                    [<input
+                        pInputText
+                        type="text"
+                        (input)="dt1.filterGlobal($any($event.target).value, 'contains')"
+                        placeholder="Search by product name"
+                    />]
+
+                </p-iconfield>
+            </div>
+        </ng-template>
+
+            <ng-template #header>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th pSortableColumn="price">
+                        Price 
+                        <p-sortIcon field="code" />
+                    </th>
+                    <th >
+                        Category
+                    </th>
+                    <th pSortableColumn="status">
+                        Quantity
+                        <p-sortIcon field="quantity" />
+                    </th>
+                    <th>Status</th>
+                </tr>
+            </ng-template>
+            <ng-template #body let-product>
+                <tr>
+                    <td>{{ product.id }}</td>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.price }}</td>
+                    <td>
+                        <p-tag class="m-1" *ngFor="let category of product.category"  severity="contrast">
+                            {{ category }}
+                        </p-tag>
+
+                    </td>
+                    <td>{{ product.quantity }}</td>
+                    <td>
+                        <p-tag [value]="product.status" [severity]="getSeverity(product.status)" />
+                        
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>
